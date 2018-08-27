@@ -33,7 +33,7 @@ class MagnumClient(rest_client.RestClient):
 
     @classmethod
     def deserialize(cls, resp, body, model_type):
-        return resp, model_type.from_json(body)
+        return resp, model_type.from_json(body.decode('utf-8'))
 
     @property
     def tenant_id(self):
