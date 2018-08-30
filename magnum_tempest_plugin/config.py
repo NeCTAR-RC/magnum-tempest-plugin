@@ -28,6 +28,10 @@ ServiceAvailableGroup = [
 magnum_group = cfg.OptGroup(name="magnum", title="Magnum Options")
 
 MagnumGroup = [
+    cfg.StrOpt("coe",
+               default="swarm-mode",
+               help="Container Orchestration Engine"),
+
     cfg.StrOpt("image_id",
                default="fedora-atomic-latest",
                help="Image id to be used for ClusterTemplate."),
