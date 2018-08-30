@@ -487,7 +487,7 @@ def cluster_template_valid_data_with_specific_coe(coe):
                                  image_id=config.Config.image_id, coe=coe)
 
 
-def valid_swarm_mode_cluster_template(is_public=False):
+def valid_cluster_template(is_public=False):
     """Generates a valid swarm-mode cluster_template with valid data
 
     :returns: ClusterTemplateEntity with generated data
@@ -498,7 +498,7 @@ def valid_swarm_mode_cluster_template(is_public=False):
                                  public=is_public,
                                  dns_nameserver=config.Config.dns_nameserver,
                                  master_flavor_id=master_flavor_id,
-                                 coe="swarm-mode",
+                                 coe=config.Config.coe,
                                  cluster_distro=None,
                                  external_network_id=config.Config.nic_id,
                                  http_proxy=None, https_proxy=None,
