@@ -493,18 +493,20 @@ def valid_cluster_template(is_public=False):
     :returns: ClusterTemplateEntity with generated data
     """
     master_flavor_id = config.Config.master_flavor_id
-    return cluster_template_data(image_id=config.Config.image_id,
-                                 flavor_id=config.Config.flavor_id,
-                                 public=is_public,
-                                 dns_nameserver=config.Config.dns_nameserver,
-                                 master_flavor_id=master_flavor_id,
-                                 coe=config.Config.coe,
-                                 cluster_distro=None,
-                                 external_network_id=config.Config.nic_id,
-                                 http_proxy=None, https_proxy=None,
-                                 no_proxy=None, network_driver=None,
-                                 volume_driver=None, labels={},
-                                 tls_disabled=False)
+    return cluster_template_data(
+        image_id=config.Config.image_id,
+        flavor_id=config.Config.flavor_id,
+        public=is_public,
+        dns_nameserver=config.Config.dns_nameserver,
+        master_flavor_id=master_flavor_id,
+        coe=config.Config.coe,
+        cluster_distro=None,
+        external_network_id=config.Config.nic_id,
+        http_proxy=None, https_proxy=None,
+        no_proxy=None, network_driver=None,
+        volume_driver=None, labels={},
+        docker_storage_driver=config.Config.docker_storage_driver,
+        tls_disabled=False)
 
 
 def cluster_data(name=data_utils.rand_name('cluster'),
