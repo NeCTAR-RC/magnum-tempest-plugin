@@ -39,6 +39,9 @@ MagnumGroup = [
                default="fedora-atomic-latest",
                help="Image id to be used for ClusterTemplate."),
 
+    cfg.StrOpt("labels",
+               help="Labels in format key1=value1,key2=value2."),
+
     cfg.StrOpt("nic_id",
                default="public",
                help="NIC id."),

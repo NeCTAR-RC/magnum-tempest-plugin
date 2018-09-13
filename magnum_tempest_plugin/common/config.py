@@ -15,6 +15,7 @@ import warnings
 from tempest import config
 
 from oslo_config import cfg
+from oslo_utils import strutils
 
 CONF = config.CONF
 
@@ -101,6 +102,21 @@ class Config(object):
         cls.image_id = CONF.magnum.image_id
 
     @classmethod
+    def set_labels(cls, config):
+        labels = {}
+        ls = strutils.split_by_commas(CONF.magnum.get('labels', None))
+        for l in ls:
+            try:
+                (k, v) = l.split(('='), 1)
+            except ValueError:
+                raise Exception('labels must be in format key1=val1,key2-val2')
+            if k not in labels:
+                labels[k] = v
+            else:
+                raise Exception('key %s in labels defined multiple times')
+        cls.labels = labels
+
+    @classmethod
     def set_nic_id(cls, config):
         if 'nic_id' not in CONF.magnum:
             raise Exception('config missing nic_id key')
@@ -158,6 +174,7 @@ class Config(object):
         cls.set_docker_storage_driver(config)
         cls.set_region(config)
         cls.set_image_id(config)
+        cls.set_labels(config)
         cls.set_nic_id(config)
         cls.set_keypair_id(config)
         cls.set_flavor_id(config)
