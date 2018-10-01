@@ -104,16 +104,19 @@ class Config(object):
     @classmethod
     def set_labels(cls, config):
         labels = {}
-        ls = strutils.split_by_commas(CONF.magnum.get('labels', None))
-        for l in ls:
-            try:
-                (k, v) = l.split(('='), 1)
-            except ValueError:
-                raise Exception('labels must be in format key1=val1,key2-val2')
-            if k not in labels:
-                labels[k] = v
-            else:
-                raise Exception('key %s in labels defined multiple times')
+        l = CONF.magnum.get('labels', None)
+        if l is not None:
+            ls = strutils.split_by_commas(l)
+            for l in ls:
+                try:
+                    (k, v) = l.split(('='), 1)
+                except ValueError:
+                    raise Exception('labels must be in format '
+                                    'key1=val1,key2-val2')
+                if k not in labels:
+                    labels[k] = v
+                else:
+                    raise Exception('key %s in labels defined multiple times')
         cls.labels = labels
 
     @classmethod
